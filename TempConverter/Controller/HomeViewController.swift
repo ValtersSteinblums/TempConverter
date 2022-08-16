@@ -11,9 +11,7 @@ class HomeViewController: UIViewController {
 
     
     @IBOutlet weak var celsiumLabel: UILabel!
-    
     @IBOutlet weak var convertedLabel: UILabel!
-    
     @IBOutlet weak var tempSlider: UISlider! {
         didSet {
             tempSlider.minimumValue = 0
@@ -63,6 +61,14 @@ class HomeViewController: UIViewController {
         
         return (farenheit, kelvin)
     }
+    
+    
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "convertedViewID" {
+                guard let vc = segue.destination as? ResultViewController else {return}
+                vc.whatTempConvertedToWhat = "\(celsiumLabel.text ?? "No data") = \(convertedLabel.text ?? "No data")"
+            }
+        }
     
 
 }
